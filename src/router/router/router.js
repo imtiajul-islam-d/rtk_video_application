@@ -13,7 +13,7 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/video",
+        path: "/video/:id",
         element: <Video></Video>,
       },
     ],
