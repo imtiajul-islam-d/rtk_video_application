@@ -5,20 +5,26 @@ import SingleVideo from "../SingleVideo/SingleVideo";
 import Loading from "../Ui/Loading";
 
 const VideoGrid = () => {
-  const disptch = useDispatch();
+  const { tags, search } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
   useEffect(() => {
-    disptch(fetchVideos());
-  }, [disptch]);
-  const {videos, isLoading, isError, error} = useSelector(state => state.videos);
+    dispatch(fetchVideos({tags, search}));
+  }, [dispatch, tags, search]);
+  const { videos, isLoading, isError, error } = useSelector(
+    (state) => state.videos
+  );
   // decide what to render
   let content;
-  if(isLoading) content = <Loading></Loading>;
-  if(!isLoading && isError) content = <div className="col-span-12">{error}</div>;
-  if( !isError && !isLoading && videos.length === 0) {
-    content = <div className="col-span-12">No videos found!!</div>
+  if (isLoading) content = <Loading></Loading>;
+  if (!isLoading && isError)
+    content = <div className="col-span-12">{error}</div>;
+  if (!isError && !isLoading && videos.length === 0) {
+    content = <div className="col-span-12">No videos found!!</div>;
   }
-  if( !isError && !isLoading && videos.length > 0) {
-    content = videos.map(video => <SingleVideo key={video.id} video={video}></SingleVideo>)
+  if (!isError && !isLoading && videos.length > 0) {
+    content = videos.map((video) => (
+      <SingleVideo key={video.id} video={video}></SingleVideo>
+    ));
   }
   return (
     <>
