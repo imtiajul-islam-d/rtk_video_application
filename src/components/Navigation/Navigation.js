@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import { searched } from "../../features/filter/filterSlice";
 import logo from "./../../assets/lws.svg";
 import searchIcn from "./../../assets/search.svg";
 
 const Navigation = () => {
+  const match = useMatch("/");
+  const navigate = useNavigate()
   const { search } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const [input, setInput] = useState(search);
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(searched(input));
+    // if user not in homepage redirect to homepage
+    if(!match){
+      navigate("/")
+    }
   };
   console.log(input);
   return (
