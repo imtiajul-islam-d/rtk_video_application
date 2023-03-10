@@ -12,7 +12,6 @@ const Video = () => {
   const { video, isLoading, isError, error } = useSelector(
     (state) => state.video
   );
-  console.log(video);
   const { videoId } = useParams();
   useEffect(() => {
     dispatch(fetchVideo(videoId));

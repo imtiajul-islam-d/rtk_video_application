@@ -10,7 +10,6 @@ const VideoGrid = () => {
     disptch(fetchVideos());
   }, [disptch]);
   const {videos, isLoading, isError, error} = useSelector(state => state.videos);
-  console.log(videos);
   // decide what to render
   let content;
   if(isLoading) content = <Loading></Loading>;

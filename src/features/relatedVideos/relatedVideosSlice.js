@@ -9,8 +9,8 @@ const initialState = {
     error: "",
   };
   
-  export const fetchRelatedVideos = createAsyncThunk("tags/fetchTags", async (id, tags) => {
-    const relatedVideos = await getRelatedVideos({id, tags});
+  export const fetchRelatedVideos = createAsyncThunk("tags/fetchTags", async ({currentId, tags}) => {
+    const relatedVideos = await getRelatedVideos({currentId, tags});
     return relatedVideos;
   });
   
